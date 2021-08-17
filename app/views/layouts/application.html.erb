@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatApplication</title>
+    <i class="fas fa-american-sign-language-interpreting"></i>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
+    <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
+  </head>
+  <body>
+    <div class="ui small inverted menu ">
+      <div class="ui container">
+        <%= link_to "Chatroom", root_path, class:'item'%>
+        <a class="item">
+          Messages
+        </a>
+        <div class="right menu">
+          <div class="ui dropdown item">
+            Account <i class="dropdown icon"></i>
+            <div class="menu">
+              <% if !logged_in? %>
+                <%= link_to "Log in",sessions_new_path,class:'item' %>
+              <% else %>
+                <%= link_to "Logout", logout_path, method: :delete, class:"item" %>
+              <% end %>
+              <a class="item">Spanish</a>
+            </div>
+          </div>
+          <% if !logged_in? %>
+            <div class="item">
+              <%= link_to "Log in", sessions_new_path, class: "ui primary button" %>
+              <%# <div class="ui primary button">Sign Up</div> %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="ui container">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </div>
+  </body>
+</html>
